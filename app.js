@@ -1,9 +1,8 @@
 const inquirer = require('inquirer');
-const cTable = require('console.table');
+// This db is making the inquirer function close automatically
 const db = require('./db/connection');
 
 function init() {
-    // Prompt for team manager info
     inquirer.prompt([
         {
             message: "Please select an option:",
@@ -39,7 +38,6 @@ function promptChoice(answer) {
             break;
         case 'Update an employee role':
             updateEmployee();
-            break;
     }
 };
 
