@@ -13,14 +13,34 @@ function init() {
         }
     ]).then((answer) => {
         console.log(answer.init);
-
+        promptChoice(answer);
     });
 };
 
 function promptChoice(answer) {
     switch (answer.init) {
-        
+        case 'View all departments':
+            allDepartments();
+            break;
+        case 'View all roles':
+            allRoles();
+            break;
+        case 'View all employees':
+            allEmployees();
+            break;
+        case 'Add a department':
+            addDepartment();
+            break;
+        case 'Add a role':
+            addRole();
+            break;
+        case 'Add an employee':
+            addEmployee();
+            break;
+        case 'Update an employee role':
+            updateEmployee();
+            break;
     }
-}
+};
 
 init();
