@@ -12,14 +12,15 @@ function allDepartments() {
 };
 
 function allRoles() {
-    const sql = `SELECT roles.*, departments.name
-    AS department_name
+    const sql = `SELECT roles.*, 
+    departments.name AS department_name
     FROM roles
     LEFT JOIN departments
     ON roles.department_id = departments.id`;
 
     db.query(sql, (err, rows) => {
         if (err) {
+            console.log(err);
             return;
         }
         console.table(rows);
@@ -27,9 +28,19 @@ function allRoles() {
 };
 
 function allEmployees() {
-    const sql = `SELECT * FROM employees`;
+    // const sql = `SELECT employees.*, 
+    // roles.title AS role
+    // FROM employees
+    // LEFT JOIN roles ON employees.role_id = roles.id`;
+    
+    const sql = `SELECT employees.*, 
+    employees.first_name AS manager
+    FROM employees
+    LEFT JOIN employees ON employees.manager_id = employee.id`;
+
     db.query(sql, (err, rows) => {
         if (err) {
+            console.log(err);
             return;
         }
         console.table(rows);
