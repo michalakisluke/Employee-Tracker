@@ -1,6 +1,5 @@
-const inquirer = require('inquirer');
 const dbCall = require('./utils/lib');
-
+const inquirer = require('inquirer');
 
 function init() {
     inquirer.prompt([
