@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
-// This db is making the inquirer function close automatically
-const db = require('./db/connection');
+//const db = require('./db/connection');
 
 function init() {
     inquirer.prompt([

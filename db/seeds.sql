@@ -3,7 +3,7 @@ VALUES
   ('Engineering'),
   ('Sales'),
   ('Legal'),
-  ('Human Resources')
+  ('Human Resources');
 
 INSERT INTO roles (title, salary, department_id)
 VALUES
@@ -16,7 +16,7 @@ VALUES
   ('Lawyer', 250000, 3),
   ('Legal Aide', 45000, 3),
   ('HR Manager', 95000, 4),
-  ('HR Representative', 67000, 4)
+  ('HR Representative', 67000, 4);
 
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
@@ -35,4 +35,4 @@ VALUES
   ('Ayaz', 'Paine', 8, 10),
   ('Kelley', 'Filipovic', 9, NULL),
   ('Peronel','Schneijder', 10, 13),
-  ('Alexandra', 'Bartolomei', 10, 13),
+  ('Alexandra', 'Bartolomei', 10, 13);
