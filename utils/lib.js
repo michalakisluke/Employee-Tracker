@@ -2,7 +2,7 @@ const db = require('../db/connection');
 
 //display departments table from employees database
 function allDepartments() {
-    const sql = 'SELECT * FROM departments'
+    const sql = `SELECT * FROM departments`;
     db.query(sql, (err, rows) => {
         if (err) {
             return;
@@ -12,7 +12,12 @@ function allDepartments() {
 };
 
 function allRoles() {
-    const sql = 'SELECT * FROM roles'
+    const sql = `SELECT roles.*, departments.name
+    AS department_name
+    FROM roles
+    LEFT JOIN departments
+    ON roles.department_id = departments.id`;
+
     db.query(sql, (err, rows) => {
         if (err) {
             return;
@@ -22,7 +27,7 @@ function allRoles() {
 };
 
 function allEmployees() {
-    const sql = 'SELECT * FROM employees'
+    const sql = `SELECT * FROM employees`;
     db.query(sql, (err, rows) => {
         if (err) {
             return;
