@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
-const db = require('./db/connection');
+const dbCall = require('./utils/lib');
+
 
 function init() {
     inquirer.prompt([
@@ -10,7 +11,6 @@ function init() {
             choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role']
         }
     ]).then((answer) => {
-        console.log(answer.init);
         promptChoice(answer);
     });
 };
@@ -18,25 +18,25 @@ function init() {
 function promptChoice(answer) {
     switch (answer.init) {
         case 'View all departments':
-            allDepartments();
+            dbCall.allDepartments();
             break;
-        case 'View all roles':
-            allRoles();
-            break;
-        case 'View all employees':
-            allEmployees();
-            break;
-        case 'Add a department':
-            addDepartment();
-            break;
-        case 'Add a role':
-            addRole();
-            break;
-        case 'Add an employee':
-            addEmployee();
-            break;
-        case 'Update an employee role':
-            updateEmployee();
+        // case 'View all roles':
+        //     allRoles();
+        //     break;
+        // case 'View all employees':
+        //     allEmployees();
+        //     break;
+        // case 'Add a department':
+        //     addDepartment();
+        //     break;
+        // case 'Add a role':
+        //     addRole();
+        //     break;
+        // case 'Add an employee':
+        //     addEmployee();
+        //     break;
+        // case 'Update an employee role':
+        //     updateEmployee();
     }
 };
 
