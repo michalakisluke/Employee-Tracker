@@ -1,5 +1,5 @@
-const dbCall = require('./utils/lib');
 const inquirer = require('inquirer');
+const dbCall = require('./utils/lib');
 
 function init() {
     inquirer.prompt([
@@ -19,12 +19,12 @@ function promptChoice(answer) {
         case 'View all departments':
             dbCall.allDepartments();
             break;
-        // case 'View all roles':
-        //     allRoles();
-        //     break;
-        // case 'View all employees':
-        //     allEmployees();
-        //     break;
+        case 'View all roles':
+            dbCall.allRoles();
+            break;
+        case 'View all employees':
+            dbCall.allEmployees();
+            break;
         // case 'Add a department':
         //     addDepartment();
         //     break;

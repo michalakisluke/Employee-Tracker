@@ -11,13 +11,25 @@ function allDepartments() {
     })
 };
 
-// function allRoles() {
+function allRoles() {
+    const sql = 'SELECT * FROM roles'
+    db.query(sql, (err, rows) => {
+        if (err) {
+            return;
+        }
+        console.table(rows);
+    })
+};
 
-// };
-
-// function allEmployees() {
-
-// };
+function allEmployees() {
+    const sql = 'SELECT * FROM employees'
+    db.query(sql, (err, rows) => {
+        if (err) {
+            return;
+        }
+        console.table(rows);
+    })
+};
 
 // function addDepartment() {
 
@@ -35,7 +47,7 @@ function allDepartments() {
 
 // };
 
-module.exports = { allDepartments };
+module.exports = { allDepartments, allRoles, allEmployees };
 
 // switch (answer.init) {
 //     case 'View all departments':
