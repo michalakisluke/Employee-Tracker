@@ -34,9 +34,11 @@ function allEmployees() {
     // LEFT JOIN roles ON employees.role_id = roles.id`;
     
     const sql = `SELECT employees.*, 
-    employees.first_name AS manager
+    CONCAT(managers.first_name,' ',managers.last_name) AS manager, 
+    roles.title AS role
     FROM employees
-    LEFT JOIN employees ON employees.manager_id = employee.id`;
+    LEFT JOIN roles ON employees.role_id = roles.id
+    LEFT JOIN employees as managers on employees.manager_id = managers.id`;
 
     db.query(sql, (err, rows) => {
         if (err) {
