@@ -38,7 +38,7 @@ function allEmployees() {
     });
 };
 
-//add to the departments database, display updated table
+//add to the departments table
 function addDepartment(answer) {
     const sql = `INSERT INTO departments (name) VALUES(?)`;
     const param = answer;
@@ -49,6 +49,7 @@ function addDepartment(answer) {
     });
 };
 
+//add to the roles table
 function addRole(answer) {
     const sql = `INSERT INTO roles (title, salary, department_id) VALUES(?,?,?)`;
     const param = [answer.title, answer.salary, answer.dept];
@@ -59,6 +60,7 @@ function addRole(answer) {
     });
 };
 
+//add to the employees table
 function addEmployee(answer) {
     const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES(?,?,?,?)`;
     const param = [answer.first, answer.last, answer.role, answer.manager];
@@ -69,6 +71,7 @@ function addEmployee(answer) {
     });
 };
 
+//update employee information in the employee table
 function updateEmployee(answer) {
     const sql = `UPDATE employees
                  SET role_id = ?
@@ -79,15 +82,6 @@ function updateEmployee(answer) {
     .then(() => {
         console.log("Successfully updated employee information");
     });
-
-    // db.query(sql, param, (err, result) => {
-    //     if (err) {
-    //         console.log(err);
-    //         return;
-    //     }
-    //     console.log("Successfully updated employee information");
-    //     allEmployees();
-    // });
 };
 
 module.exports = { allDepartments, allRoles, allEmployees, addDepartment, addRole, addEmployee, updateEmployee };
