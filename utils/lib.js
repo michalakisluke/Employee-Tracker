@@ -2,7 +2,7 @@ const db = require('../db/connection');
 
 //display departments table from departments table in employees database
 function allDepartments() {
-    const sql = `SELECT * FROM departments`;
+    const sql = `SELECT id, name FROM departments`;
     return db.promise().query(sql)
     .then(([rows, fields]) => {
         console.table(rows);
@@ -11,7 +11,7 @@ function allDepartments() {
 
 //display all roles from roles table in employees database
 function allRoles() {
-    const sql = `SELECT roles.*, 
+    const sql = `SELECT roles.id, roles.title, roles.salary,
     departments.name AS department_name
     FROM roles
     LEFT JOIN departments
@@ -25,7 +25,7 @@ function allRoles() {
 
 //display all employees from employees table in employees database
 function allEmployees() {
-    const sql = `SELECT employees.*, 
+    const sql = `SELECT employees.id, employees.first_name, employees.last_name,
     CONCAT(managers.first_name,' ',managers.last_name) AS manager, 
     roles.title AS role
     FROM employees
@@ -85,4 +85,3 @@ function updateEmployee(answer) {
 };
 
 module.exports = { allDepartments, allRoles, allEmployees, addDepartment, addRole, addEmployee, updateEmployee };
-
