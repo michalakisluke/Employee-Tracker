@@ -84,7 +84,7 @@ function addEmployee(answer) {
             console.log(err);
             return;
         }
-        console.log('Succesfully added ' + param[0] +''+ param[1] + ' to the employees table');
+        console.log('Succesfully added ' + param[0] + '' + param[1] + ' to the employees table');
         allEmployees();
     });
 };
@@ -93,7 +93,7 @@ function updateEmployee(answer) {
     const sql = `UPDATE employees
                  SET role_id = ?
                  WHERE id = ?`;
-    const param = [answer.id, answer.newRole];
+    const param = [answer.newRole, answer.id];
 
     db.query(sql, param, (err, result) => {
         if (err) {
