@@ -3,10 +3,8 @@ const db = require('../db/connection');
 //display departments table from departments table in employees database
 function allDepartments() {
     const sql = `SELECT * FROM departments`;
-    db.query(sql, (err, rows) => {
-        if (err) {
-            return;
-        }
+    return db.promise().query(sql)
+    .then(([rows, fields]) => {
         console.table(rows);
     })
 };
@@ -19,13 +17,10 @@ function allRoles() {
     LEFT JOIN departments
     ON roles.department_id = departments.id`;
 
-    db.query(sql, (err, rows) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
+    return db.promise().query(sql)
+    .then(([rows, fields]) => {
         console.table(rows);
-    })
+    });
 };
 
 //display all employees from employees table in employees database
@@ -37,13 +32,10 @@ function allEmployees() {
     LEFT JOIN roles ON employees.role_id = roles.id
     LEFT JOIN employees as managers on employees.manager_id = managers.id`;
 
-    db.query(sql, (err, rows) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
+    return db.promise().query(sql)
+    .then(([rows, fields]) => {
         console.table(rows);
-    })
+    });
 };
 
 //add to the departments database, display updated table
@@ -51,13 +43,9 @@ function addDepartment(answer) {
     const sql = `INSERT INTO departments (name) VALUES(?)`;
     const param = answer;
 
-    db.query(sql, param, (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        console.log('Succesfully added ' + param + ' to the departments table');
-        allDepartments();
+    return db.promise().query(sql, param)
+    .then(() => {
+        console.log('Successfully added '  + param + ' to the departments table');
     });
 };
 
@@ -65,13 +53,9 @@ function addRole(answer) {
     const sql = `INSERT INTO roles (title, salary, department_id) VALUES(?,?,?)`;
     const param = [answer.title, answer.salary, answer.dept];
 
-    db.query(sql, param, (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
+    return db.promise().query(sql, param)
+    .then(() => {
         console.log('Succesfully added ' + param[0] + ' to the roles table');
-        allRoles();
     });
 };
 
@@ -79,13 +63,9 @@ function addEmployee(answer) {
     const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES(?,?,?,?)`;
     const param = [answer.first, answer.last, answer.role, answer.manager];
 
-    db.query(sql, param, (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        console.log('Succesfully added ' + param[0] + '' + param[1] + ' to the employees table');
-        allEmployees();
+    return db.promise().query(sql, param)
+    .then(() => {
+        console.log('Succesfully added ' + param[0] + ' ' + param[1] + ' to the employees table');
     });
 };
 
@@ -95,14 +75,19 @@ function updateEmployee(answer) {
                  WHERE id = ?`;
     const param = [answer.newRole, answer.id];
 
-    db.query(sql, param, (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
+    return db.promise().query(sql, param)
+    .then(() => {
         console.log("Successfully updated employee information");
-        allEmployees();
     });
+
+    // db.query(sql, param, (err, result) => {
+    //     if (err) {
+    //         console.log(err);
+    //         return;
+    //     }
+    //     console.log("Successfully updated employee information");
+    //     allEmployees();
+    // });
 };
 
 module.exports = { allDepartments, allRoles, allEmployees, addDepartment, addRole, addEmployee, updateEmployee };

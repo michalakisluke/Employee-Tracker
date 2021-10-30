@@ -1,5 +1,4 @@
 const inquirer = require('inquirer');
-const db = require('./db/connection');
 const dbCall = require('./utils/lib');
 
 function init() {
@@ -18,13 +17,19 @@ function init() {
 function promptChoice(answer) {
     switch (answer.init) {
         case 'View all departments':
-            dbCall.allDepartments();
+            dbCall.allDepartments().then(function() {
+                init();
+            });
             break;
         case 'View all roles':
-            dbCall.allRoles();
+            dbCall.allRoles().then(function() {
+                init();
+            });
             break;
         case 'View all employees':
-            dbCall.allEmployees();
+            dbCall.allEmployees().then(function() {
+                init();
+            });
             break;
         case 'Add a department':
             inquirer.prompt([
@@ -34,7 +39,9 @@ function promptChoice(answer) {
                     type: "input",
                 }
             ]).then((answer) => {
-                dbCall.addDepartment(answer.addDept);
+                dbCall.addDepartment(answer.addDept).then(function() {
+                    init();
+                });
             });
             break;
         case 'Add a role':
@@ -55,7 +62,9 @@ function promptChoice(answer) {
                     type: "number"
                 }
             ]).then((answer) => {
-                dbCall.addRole(answer);
+                dbCall.addRole(answer).then(function() {
+                    init();
+                });
             });
             break;
         case 'Add an employee':
@@ -81,7 +90,9 @@ function promptChoice(answer) {
                     type: "number"
                 },
             ]).then((answer) => {
-                dbCall.addEmployee(answer);
+                dbCall.addEmployee(answer).then(function() {
+                    init();
+                });
             });
             break;
         case 'Update an employee role':
@@ -97,11 +108,11 @@ function promptChoice(answer) {
                     type: "number"
                 }
             ]).then((answer) => {
-                dbCall.updateEmployee(answer);
+                dbCall.updateEmployee(answer).then(function() {
+                    init();
+                });
             });
     }
-
-    init();
 };
 
 init();
