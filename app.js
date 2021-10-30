@@ -100,6 +100,8 @@ function promptChoice(answer) {
                 dbCall.updateEmployee(answer);
             });
     }
+
+    init();
 };
 
 init();
